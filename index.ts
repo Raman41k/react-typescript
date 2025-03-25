@@ -49,17 +49,35 @@ let user2: User = {
 }
 console.log('user2', user2);
 
-type Admin = {
+// type Admin = {
+//     permissions: string[]
+// }
+//
+// type AppUser = {
+//     username: string,
+// }
+//
+// type AppAdmin = AppUser & Admin;
+
+// let admin: AppAdmin = {
+//     username: 'Roman',
+//     permissions: ['admin']
+// }
+
+interface Admin {
     permissions: string[]
 }
 
-type AppUser = {
+interface AppUser {
     username: string,
 }
 
-type AppAdmin = AppUser & Admin;
+interface AppAdmin extends AppUser, Admin {
+    surname: string
+}
 
 let admin: AppAdmin = {
     username: 'Roman',
-    permissions: ['admin']
+    permissions: ['admin'],
+    surname: 'Smith'
 }
