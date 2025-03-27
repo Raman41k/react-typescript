@@ -81,3 +81,68 @@ let admin: AppAdmin = {
     permissions: ['admin'],
     surname: 'Smith'
 }
+
+type Role = 'admin' | 'user' | 'editor';
+
+let role: Role; // 'admin', 'user' or 'editor'
+
+// role = 'admin';
+// role = 'user';
+// role = 'editor';
+// role = 'test'; <- will be error because variable role can be only 'admin', 'user' or 'editor'
+
+function performAction(action: string, role: Role) {
+    if (role === "admin") {
+         console.log('admin');
+    }
+    if (role === "user") {
+        console.log('user');
+    }
+    if (role === "editor") {
+        console.log('editor');
+    }
+    console.log(action);
+}
+
+let roles: Array<Role>;
+
+roles = ['admin', 'user', 'editor'];
+
+console.log(roles);
+
+type DataStorage<T> = {
+    storage: Array<T>;
+    add: (item: T) => void;
+}
+
+const textStorage: DataStorage<string> = {
+    storage: [],
+    add(data) {
+        this.storage.push(data);
+    }
+};
+
+const userStorage: DataStorage<User> = {
+    storage: [],
+    add(user) {
+        this.storage.push(user);
+    }
+}
+
+userStorage.add({
+    name: 'Roman',
+    age: 22,
+    isAdmin: true,
+    id: '123'
+});
+
+console.log(userStorage);
+
+function merge<T, U>(a: T, b: U) {
+    return {
+        ...a,
+        ...b
+    }
+}
+
+const user3 = merge<{ name: string }, { age: number }>({name: 'Roman'}, {age: 22});
